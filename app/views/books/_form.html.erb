@@ -1,4 +1,13 @@
-<%= form_with model:book,local:true do |f| %>
+<%= form_with model: book,local:true do |f| %>
+  <% if book.errors.any? %>
+  <%= book.errors.count %>error
+    <ul>
+      <% book.errors.messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title, class: 'form-control book_title' %>
