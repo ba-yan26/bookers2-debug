@@ -12,6 +12,17 @@
     <%= render 'layouts/header' %>
       <main>
         <p id="notice"><%= notice %></p>
+        <div class="text-center">
+          <%= form_with url: search_path, method: :get, local:true do |f| %>
+            <%= f.text_field :word %>
+            <!-- 入力されたものをwordとして送る -->
+            <%= f.select :range, options_for_select([['User'],['Book']]) %>
+            <!-- UserかBookが選択されて、その内容をrangeとして送る -->
+            <%= f.select :search, options_for_select([["完全一致","perfect_match"],["前方一致","forward_match"],["後方一致","backforward_match"],["部分一致","partial_match"]]) %>
+            <!-- 4つのどれかが選択されsearchとして送る -->
+            <%= f.submit "検索" %>
+          <% end %>
+        </div>
         <%= yield %>
       </main>
     <%= render 'layouts/footer' %>
