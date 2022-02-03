@@ -10,18 +10,14 @@
   </tr>
   <tr>
 	  <th>follows</th>
-	  <th>
-	    <%= link_to followings_user_path(user) do %>
-	      <%= user.followings.count %>
-	     <% end %>
-	   </th>
+	  <th class="following_count_info_<%= user.id %>">
+	    <%= render 'relationships/following_count_info', user: user %>
+    </th>
   </tr>
   <tr>
 	  <th>followers</th>
-	  <th>
-	    <%= link_to followers_user_path(user) do %>
-	      <%= user.followers.count %>
-      <% end %>
+	  <th class="follower_count_info_<%= user.id %>">
+	    <%= render 'relationships/follower_count_info', user: user %>
 	  </th>
   </tr>
 </table>
@@ -32,14 +28,8 @@
       <i class="fas fa-user-cog"></i>
     <% end %>
   <% else %>
-    <% if user.is_followed_by?(current_user) %>
-      <%= link_to user_relationships_path(user), method: :delete do %>
-        <button class="btn btn-danger w-100">フォロー解除</button>
-      <% end %>
-    <% else %>
-      <%= link_to user_relationships_path(user), method: :post do %>
-        <button class="btn btn-primary w-100">フォロー</button>
-      <% end %>
-    <% end %>
+  <div class="follow_btn_<%= user.id %>">
+    <%= render 'relationships/follow', user: user %>
+  </div>
   <% end %>
 </div>
