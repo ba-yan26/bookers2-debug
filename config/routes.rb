@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     # あるユーザーをフォローしている人を表示させるルーティング。on: :memberでidを含ませることができる
   end
 
-  resources :groups, except: [:destroy]
+  resources :groups do
+    get "join" => "groups#join"
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
