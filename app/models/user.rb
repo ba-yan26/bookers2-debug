@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: :follower_id
   has_many :followers, through: :reverse_of_relationships, source: :following
   # あるユーザーをフォローしている人をrelationshipテーブルを介して取ってくる
+  has_many :group_users
+  has_many :groups, through: :group_users
 
   has_one_attached :profile_image
 
