@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     get :followers, on: :member
     # あるユーザーをフォローしている人を表示させるルーティング。on: :memberでidを含ませることができる
   end
+  
+  resources :messages, only: [:create]
+  resources :rooms, only: [:create, :show]
 
   resources :groups do
     get "join" => "groups#join"
