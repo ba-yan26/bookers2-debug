@@ -8,7 +8,7 @@ class BooksController < ApplicationController
 
   def index
     to = Time.current.at_end_of_day
-    # Time.currentはrailsのapplication.rbのconfig.time_zoneをみている
+    # config/application.rbに設定してあるタイムゾーンを元に現在日時を取得
     # 要は現在の時刻をとってきている
     # at_end_of_dayは1日の終わりを23:59に設定している
     from = (to - 6.day).at_beginning_of_day
