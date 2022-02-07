@@ -1,6 +1,8 @@
 class Book < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
+  # favorited_usersというモデルは存在しないので、favoritesモデルを介してuserモデルのデータを持ってくる
   has_many :book_comments, dependent: :destroy
 
   validates :title,presence:true
