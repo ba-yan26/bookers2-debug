@@ -9,6 +9,20 @@
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
       <%= render 'books/index',books: @books %>
+        <% unless @user.id == current_user.id %>
+          <% if (current_user.is_followed_by? @user) && (@user.is_followed_by? current_user)  %>
+            <% if @isRoom == true %>
+              <%= link_to "チャットへ", room_path(@room.id), class:"btn btn-primary btn-lg" %>
+            <% else %>
+              <%= form_with model: @room, local:true do |f| %>
+                <%= fields_for @entry do |e| %>
+                  <%= e.hidden_field :user_id, value: @user.id %>
+                <% end %>
+                <%= f.submit "チャットを始める", class:"btn btn-primary btn-lg user-show-chat"%>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
     </div>
   </div>
 </div>

@@ -3,26 +3,27 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @books = @user.books
-    @book = Book.new
-    
     @currentUserEntry = Entry.where(user_id: current_user.id)
     @userEntry = Entry.where(user_id: @user.id)
+    # roomがcreateされた時にcurrent_user(ログインユーザー)と@user_id(チャットへを押したユーザー)の両方を
+    # entriesテーブルに記録する必要があるのでwhereメソッドでそのユーザーを探す
     unless @user.id == current_user.id
+    # ログインしているユーザーではない時
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|
-          if cu.room_id == u.room_id then
+          if cu.room_id == u.room_id
             @isRoom = true
             @roomId = cu.room_id
           end
         end
       end
-      if @isRoom
-      else
+      unless @isRoom
         @room = Room.new
         @entry = Entry.new
       end
     end
+    @books = @user.books
+    @book = Book.new
   end
 
   def index
