@@ -9,9 +9,9 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @room = Room.find(params[:id])
-    if Entry.where(user_id: current_user.id, room_id: @room_id).present?
+    @user = User.find(params[:id])
+    if Entry.where(user_id: current_user.id, room_id: @room.id).present?
       @messages = @room.messages
       @message = Message.new
       @entries = @room.entries
