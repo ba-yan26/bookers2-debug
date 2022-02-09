@@ -14,6 +14,9 @@
         <td class="following_count_<%= user.id %>"><%= render 'relationships/following_count', user: user %></td>
         <td class="follower_count_<%= user.id %>"><%= render 'relationships/follower_count', user: user %></td>
         <td class="follow_btn_<%= user.id %>"><%= render 'relationships/follow', user: user %></td>
+        <td>
+
+        </td>
         <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
       </tr>
     <% end %>
